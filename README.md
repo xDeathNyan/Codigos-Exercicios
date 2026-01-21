@@ -1,2 +1,3 @@
-# Mundo2
- Curso Python
+# Exercícios realizados em diversos cursos e plataformas
+
+Keep Pushing
