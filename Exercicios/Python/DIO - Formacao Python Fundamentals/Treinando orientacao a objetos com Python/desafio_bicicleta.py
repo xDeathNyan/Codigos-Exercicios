@@ -23,3 +23,4 @@ class Bicicleta:
 
 b1 = Bicicleta("Vermelha", "Mountain Bike", 2021, 1500.00)
 print(b1)
+
