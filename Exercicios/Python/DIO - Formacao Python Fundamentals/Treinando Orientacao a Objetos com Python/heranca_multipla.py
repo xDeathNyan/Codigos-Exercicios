@@ -7,15 +7,15 @@ class Animal:
 
 
 class Mamifero(Animal):
-    def __init__(self, nro_patas, cor_pelo="Indefinida"):
-        super().__init__(nro_patas)
+    def __init__(self, cor_pelo="Indefinida", **kwargs):
+        super().__init__(**kwargs)
+        self.cor_pelo = cor_pelo
 
 
 class Ave(Animal):
-    def __init__(self, nro_patas):
-        super().__init__(nro_patas)
-
-
+    def __init__(self, cor_bico="Indefinida", **kwargs):
+        super().__init__(**kwargs)
+        self.cor_bico = cor_bico
 
 class Gato(Mamifero):
     pass
@@ -23,9 +23,15 @@ class Gato(Mamifero):
 
 
 class Ornitorrinco(Mamifero, Ave):
-    pass
+    def __init__(self, cor_bico, cor_pelo, nro_patas):
+        print(Ornitorrinco.mro())
+        super().__init__(cor_bico=cor_bico, cor_pelo=cor_pelo, nro_patas=nro_patas)
+        
 
 
 
-gato = Gato(4, "Laranja")
-print(gato)
+#gato = Gato(nro_patas=4, cor_pelo="Laranja")
+#print(gato)
+
+ornitorrinco = Ornitorrinco(nro_patas=4, cor_pelo="Marrom", cor_bico="Preto")
+print(ornitorrinco)
