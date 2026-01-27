@@ -1,22 +1,41 @@
 class Conta:
     def __init__(self, nro_agencia, saldo=0):
-        self._saldo = saldo
-        self.nro_agencia = nro_agencia
+        self.nro_agencia = nro_agencia # PUBLICO: Livre acesso
+        self._limite = 500             # PROTECTED: Avisa "não mexa", mas permite acesso
+        self.__saldo = saldo           # PRIVATE: O Python "esconde" (Name Mangling)
+
 
     def depositar(self, valor):
-        self._saldo += valor
+        # Uso interno do atributo privado
+        self.__saldo += valor
 
     def sacar(self, valor):
-        self._saldo -= valor
+        # Exemplo de uso de MÉTODO privado para validar a operação
+        if self.__pode_sacar(valor):
+            self.__saldo -= valor
+            print("Saque realizado!")
+        else:
+            print("Saldo insuficiente.")
+
+    # MÉTODO PRIVADO: Só faz sentido dentro da classe Conta
+    def __pode_sacar(self, valor):
+        return self.__saldo >= valor
 
     def mostrar_saldo(self):
-        return self._saldo
+        return self.__saldo
 
+# --- Testando o comportamento ---
 
 conta = Conta("0001", 100)
-conta.depositar(50)
-conta.sacar(30)
-#conta._saldo += 50 # Tentativa de acesso direto ao atributo protegido (não recomendado)
-#print(conta._saldo)  # Acesso direto ao atributo protegido (não recomendado fora da classe ou subclasses)
-print(conta.nro_agencia)  # Acesso ao atributo público
-print(conta.mostrar_saldo())  # Acesso ao saldo via método público (recomendado)
+
+# 1. Acesso ao Público: OK
+print(f"Agência: {conta.nro_agencia}")
+
+# 2. Tentativa de acesso ao Privado: ERRO
+try:
+    print(conta.__saldo) 
+except AttributeError:
+    print("Erro: Não é possível acessar '__saldo' diretamente. Ele é privado!")
+
+# 3. O jeito certo: Via método público
+print(f"Saldo atual: {conta.mostrar_saldo()}")
