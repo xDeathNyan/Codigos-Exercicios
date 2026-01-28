@@ -3,18 +3,22 @@ class Passaro:
         print("Voando...")
 
 class Pardal(Passaro):
-    def voar(self):
-       super().voar()
+    pass
 
 class Avestruz(Passaro):
     def voar(self):
         print("Avestruz não pode voar")
+
+class Aviao(Passaro):
+    def voar(self):
+        print("Avião decolando...")
 
 def plano_de_voo(objeto_passaro):
     objeto_passaro.voar()
 
 
 
-p1 = plano_de_voo(Pardal())
-p2 = plano_de_voo(Avestruz())
+plano_de_voo(Pardal())
+plano_de_voo(Avestruz())
+plano_de_voo(Aviao())
 
